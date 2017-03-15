@@ -3,6 +3,13 @@
 # 1.Merges the training and the test sets to create one data set.
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+# download file
+fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+download.file(fileUrl, destfile = "./data/Dataset.zip",method="curl")
+list.files("./data")
+
+# unzip file
+
 # filePath
 filePath <- "./data/Dataset/UCI HAR Dataset"
 
@@ -188,6 +195,8 @@ features.desc <-
 str(features.desc)
 # 'data.frame':	66 obs. of  10 variables:
 
+features.desc
+
 # merge features description
 dt.melt <- merge(dt.melt,features.desc, by="featCode", all.x=TRUE)
 str(dt.melt)
@@ -195,8 +204,6 @@ str(dt.melt)
 
 dt.melt.head <- head(dt.melt)
 
-# export 1st tidy dataset
-write.csv(dt.melt,paste0(filePath,"/1st_tidy_dataset.csv"))
 
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -214,10 +221,14 @@ dt.tidy <- dt.melt[,list(count=.N, avg=mean(value)),by=key(dt.melt)]
 str(dt.tidy)
 # Classes 'data.table' and 'data.frame':	11880 obs. of  11 variables:
 
-dt.tidy.head <- head(dt.tidy)
+dt.tidy.head <- rbind(head(dt.tidy),tail(dt.tidy))
+dt.tidy.head
 
-# export 2nd tidy dataset
-write.csv(dt.tidy,paste0(filePath,"/2nd_tidy_dataset.csv"))
+summary(dt.tidy)
+
+# export tidy_dataset
+write.csv(dt.tidy,paste0(filePath,"/tidy_dataset.csv"))
+
 
 
 
