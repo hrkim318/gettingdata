@@ -1,7 +1,5 @@
 
-## ==========
-## analysis.R
-## ==========
+## Running analysis.R
 
 Please run the R script 'run_analysis.R'.
 
