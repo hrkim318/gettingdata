@@ -227,8 +227,6 @@ dt.tidy.head
 summary(dt.tidy)
 
 # export tidy_dataset
-write.csv(dt.tidy,paste0(filePath,"/tidy_dataset.csv"))
-
-
+write.table(dt.tidy,paste0(filePath,"/tidy_dataset.txt"),quote = FALSE, sep = "\t", row.names = FALSE)
 
 
